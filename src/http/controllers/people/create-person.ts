@@ -14,6 +14,5 @@ export async function createPerson(req: FastifyRequest, reply: FastifyReply) {
 
   console.log(apelido, nome, nascimento, stack)
 
-
   return reply.status(201).send();
 }
