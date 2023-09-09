@@ -6,7 +6,7 @@ interface CreatePersonUseCaseRequest {
   apelido: string;
   nome: string;
   nascimento: string;
-  stack: Array<string>
+  stack?: Array<string>
 }
 
 interface CreatePersonUseCaseResponse {
