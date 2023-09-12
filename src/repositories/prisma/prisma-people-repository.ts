@@ -3,13 +3,20 @@ import { PeopleRepository } from "../people-repository";
 import { prisma } from "../../lib/prisma";
 
 export class PrismaPeopleRepository implements PeopleRepository {
+  async count(): Promise<number> {
+    const peopleCount = await prisma.person.count()
+
+    return peopleCount
+  }
+
   async searchMany(query: string): Promise<Person[]> {
     const people = await prisma.person.findMany({
       where: {
         OR:[
           { apelido: { contains: query, mode: 'insensitive' } },
           { nome: { contains: query, mode: 'insensitive' } },
-          // todo, implement insensitive mod on stack field
+          // todo, implement insensitive mode on stack field
+          // https://github.com/prisma/prisma/issues/8387
           { stack: { has: query } },
         ]
       },
